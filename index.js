@@ -1,14 +1,26 @@
 const express = require('express');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
+const workUpdateRoutes = require('./routes/workUpdateRoutes');
 
 const app = express();
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+}));
+
 app.use(express.json());
 app.use(cookieParser());
-
 connectDB();
 
-app.use('/auth', authRoutes);
+// Static folder for uploads
+app.use('/uploads', express.static('uploads'));
 
-app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+// Routes
+app.use('/auth', authRoutes);
+app.use('/workupdates', workUpdateRoutes);
+
+module.exports = app;
