@@ -7,7 +7,8 @@ const workUpdateRoutes = require('./routes/workUpdateRoutes');
 const attendanceRoutes = require('./routes/attendanceRoutes');
 
 const app = express();
-
+const dotenv = require('dotenv');
+dotenv.config();
 app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true,
@@ -24,7 +25,6 @@ app.use('/uploads', express.static('uploads'));
 app.use('/auth', authRoutes);
 app.use('/workupdates', workUpdateRoutes);
 app.use('/attendance', attendanceRoutes);
-
 app.listen("8000")
 
 module.exports = app;
