@@ -25,4 +25,6 @@ app.use('/auth', authRoutes);
 app.use('/workupdates', workUpdateRoutes);
 app.use('/attendance', attendanceRoutes);
 
+app.listen("8000")
+
 module.exports = app;

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { authenticateJWT } = require('../middlewares/authMiddleware');
+const { authenticateJWT } = require('../middleware/authMiddleware');
 const { createAttendance, getAttendance } = require('../controllers/attendanceController');
 
 // Record Attendance
