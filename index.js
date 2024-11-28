@@ -5,6 +5,7 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const workUpdateRoutes = require('./routes/workUpdateRoutes');
 const attendanceRoutes = require('./routes/attendanceRoutes');
+const projectRoutes = require('./routes/projectRoutes');
 
 const app = express();
 const dotenv = require('dotenv');
@@ -25,6 +26,8 @@ app.use('/uploads', express.static('uploads'));
 app.use('/auth', authRoutes);
 app.use('/workupdates', workUpdateRoutes);
 app.use('/attendance', attendanceRoutes);
+app.use('/projects', projectRoutes);
+
 app.listen("8000")
 
 module.exports = app;
