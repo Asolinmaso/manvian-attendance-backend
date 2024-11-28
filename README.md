@@ -10,6 +10,11 @@
   - [POST /auth/verify-otp](#post-authverify-otp)
   - [POST /auth/forgot-password](#post-authforgot-password)
   - [POST /auth/reset-password](#post-authreset-password)
+  - [POST /work-updates](#post-work-updates)
+  - [GET /work-updates](#get-work-updates)
+  - [POST /projects](#post-projects)
+  - [GET /projects](#post-projects)
+  - [PUT /projects/:id](#post-projects-id)
 
 ## Installation
 
@@ -88,3 +93,96 @@ Verifies the OTP and resets the user's password.
   "newPassword": "newpassword123"
 }
 ```
+
+
+## POST /work-updates
+Creates a new work update. This endpoint requires JWT authentication and allows file uploads.
+
+**Request Body**:
+Content-Type: multipart/form-data
+```json
+{
+  "projectName": "Project Alpha",       
+  "startDate": "2024-11-01T09:00:00Z",  // Start date of the work update (ISO format)
+  "deadline": "2024-11-30T18:00:00Z",  // Deadline date (ISO format)
+  "deadlineTime": "17:00",              // Deadline time (HH:mm format)
+  "status": "in progress",              // Status of the work update (in progress or completed)
+  "file": "file_path_here"              // Optional file attached (multipart upload)
+}
+```
+
+## GET /work-updates
+Fetches all work updates created by the logged-in user for a specific date. This endpoint requires JWT authentication.
+
+## Query Parameters:
+```plaintext
+date (required): The date for which to fetch work updates (format: YYYY-MM-DD).
+```
+## GET /work-updates?date=2024-11-01
+```json
+{
+  "workUpdates": [
+    {
+      "id": "work-update-id",
+      "projectName": "Project Alpha",
+      "startDate": "2024-11-01T09:00:00Z",
+      "deadline": "2024-11-30T18:00:00Z",
+      "deadlineTime": "17:00",
+      "status": "in progress",
+      "filePath": "uploads/filename.ext",
+      "createdBy": "user-id",
+      "createdAt": "2024-11-01T10:00:00Z",
+      "updatedAt": "2024-11-01T10:00:00Z"
+    }
+  ]
+}
+```
+
+## POST /projects
+Creates a new project. This endpoint requires JWT authentication.
+
+**Request Body**
+```json
+{
+  "projectName": "Project Alpha",
+  "start": "2024-11-01T09:00:00Z",   // Start date of the project (ISO format)
+  "deadline": "2024-12-01T18:00:00Z",   // Deadline of the project (ISO format)
+  "priority": "High",    // Priority level of the project (Low, Medium, High)
+  "status": "In Progress"  // Current status of the project (Planned, In Progress, Completed)
+}
+```
+## GET /projects
+Get all Projects for the loggedin user
+
+## PUT /projects/:id
+Updates an existing project by ID. This endpoint requires JWT authentication.
+
+Request Body:
+```json
+{
+  "projectName": "Updated Project Alpha",
+  "start": "2024-11-01T09:00:00Z",  // Updated start date (ISO format)
+  "deadline": "2024-12-10T18:00:00Z",  // Updated deadline (ISO format)
+  "priority": "Medium",    // Updated priority (Low, Medium, High)
+  "status": "Completed"    // Updated status (Planned, In Progress, Completed)
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
